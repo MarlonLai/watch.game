@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz Montres</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f1f1;
+    }
+    
+    #quiz-container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    
+    #options-container {
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+    }
+    
+    .option {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .option:hover {
+      background-color: #f9f9f9;
+    }
+    
+    .option input[type="text"] {
+      margin-left: 10px;
+      font-size: 16px;
+    }
+    
+    .option img {
+      width: 100px;
+      height: 100px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    
+    #submit-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #333;
+      color: #fff;
+      font-size: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    #submit-btn:hover {
+      background-color: #555;
+    }
+
+    .correct-answer {
+      text-decoration: underline;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div id="quiz-container">
+    <h1>Quiz Montres</h1>
+    <div id="options-container">
+      <div class="option">
+        <img src="rolex.png" alt="Rolex" onclick="enlargeImage(this)">
+        <input type="text" name="rolex-answer" placeholder="Entrez la marque" style="font-size: 16px;">
+      </div>
+      <div class="option">
+        <img src="vacheron constantin.png" alt="Vacheron Constantin" onclick="enlargeImage(this)">
+        <input type="text" name="vacheron-answer" placeholder="Entrez la marque" style="font-size: 16px;">
+      </div>
+      <div class="option">
+        <img src="orient.png" alt="Orient" onclick="enlargeImage(this)">
+        <input type="text" name="orient-answer" placeholder="Entrez la marque" style="font-size: 16px;">
+      </div>
+    </div>
+    <button id="submit-btn" onclick="checkAnswers()">Soumettre</button>
+  </div>
+
+  <script>
+    function enlargeImage(image) {
+      var enlargedImage = document.createElement("div");
+      enlargedImage.style.position = "fixed";
+      enlargedImage.style.top = "0";
+      enlargedImage.style.left = "0";
+      enlargedImage.style.width = "100%";
+      enlargedImage.style.height
+      enlargedImage.style.height = "100%";
+      enlargedImage.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+      enlargedImage.style.display = "flex";
+      enlargedImage.style.justifyContent = "center";
+      enlargedImage.style.alignItems = "center";
+      enlargedImage.style.zIndex = "9999";
+
+      var enlargedImg = document.createElement("img");
+      enlargedImg.src = image.src;
+      enlargedImg.style.maxWidth = "80%";
+      enlargedImg.style.maxHeight = "80%";
+
+      enlargedImage.appendChild(enlargedImg);
+      enlargedImage.addEventListener("click", function() {
+        enlargedImage.remove();
+      });
+
+      document.body.appendChild(enlargedImage);
+    }
+
+    function checkAnswers() {
+      var rolexAnswer = document.getElementsByName("rolex-answer")[0];
+      var vacheronAnswer = document.getElementsByName("vacheron-answer")[0];
+      var orientAnswer = document.getElementsByName("orient-answer")[0];
+      var correctAnswers = 0;
+
+      if (rolexAnswer.value.toLowerCase() === "rolex") {
+        rolexAnswer.classList.add("correct-answer");
+        correctAnswers++;
+      } else {
+        rolexAnswer.classList.remove("correct-answer");
+      }
+
+      if (vacheronAnswer.value.toLowerCase() === "vacheron constantin") {
+        vacheronAnswer.classList.add("correct-answer");
+        correctAnswers++;
+      } else {
+        vacheronAnswer.classList.remove("correct-answer");
+      }
+
+      if (orientAnswer.value.toLowerCase() === "orient") {
+        orientAnswer.classList.add("correct-answer");
+        correctAnswers++;
+      } else {
+        orientAnswer.classList.remove("correct-answer");
+      }
+
+      var totalQuestions = 3;
+
+      if (correctAnswers === totalQuestions) {
+        alert("Félicitations ! Vous avez répondu correctement à toutes les questions.");
+      } else {
+        var incorrectAnswers = totalQuestions - correctAnswers;
+        alert("Vous avez " + correctAnswers + " réponse(s) correcte(s) et " + incorrectAnswers + " réponse(s) incorrecte(s). Veuillez réessayer.");
+      }
+    }
+  </script>
+</body>
+</html>
+
